@@ -1,8 +1,14 @@
 ﻿<Application x:Class="FitnessApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:FitnessApp">
+             xmlns:local="clr-namespace:FitnessApp"
+             xmlns:vm="clr-namespace:FitnessApp.ViewModels"
+             xmlns:v="clr-namespace:FitnessApp.Views">
     <Application.Resources>
-         
+
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <v:HomeView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
