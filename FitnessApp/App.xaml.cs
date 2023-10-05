@@ -35,6 +35,7 @@ public partial class App : Application
     {
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<HomeViewModel>();
+        Container.RegisterSingleton<UserInfoViewModel>();
         Container.Verify();
     }
 }

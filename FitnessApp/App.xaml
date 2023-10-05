@@ -10,5 +10,9 @@
             <v:HomeView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:UserInfoViewModel}">
+            <v:UserInfoView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
