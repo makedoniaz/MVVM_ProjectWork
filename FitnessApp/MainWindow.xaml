@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
-        <ContentControl Content="{Binding ActiveViewModel}" />
+        <DockPanel>
+            <Border DockPanel.Dock="Top" BorderBrush="#2d5986">
+
+                <StackPanel Background="#538cc6" Height="50" Orientation="Horizontal">
+                    <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
+                    <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6"/>
+                    <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6"/>
+                    <Button Content="Info" Padding="12" Margin="566 0 0 0" BorderThickness="0" Foreground="White" Background="#538cc6" />
+                </StackPanel>
+            </Border>
+            
+            <ContentControl Content="{Binding ActiveViewModel}" />
+        </DockPanel>
     </Grid>
 </Window>

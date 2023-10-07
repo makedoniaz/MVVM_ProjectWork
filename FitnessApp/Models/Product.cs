@@ -13,14 +13,14 @@ public class Product
     // per 100 gramms
 
     [Range(0, 2000)]
-    public double Calories { get; set; }
+    public double CaloriesAmount { get; set; }
 
     [Range(0, 1000)]
-    public double Protein { get; set; }
+    public double ProteinAmount { get; set; }
 
     [Range(0, 1000)]
-    public double Carbs { get; set; }
+    public double CarbsAmount { get; set; }
 
     [Range(0, 1000)]
-    public double Fats { get; set; }
+    public double FatsAmount { get; set; }
 }
