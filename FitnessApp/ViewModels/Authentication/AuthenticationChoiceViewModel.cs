@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Commands.Base;
+using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.ViewModels.Base;
@@ -15,6 +16,7 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 {
     #region Fields
     private IUserRepository _userRepository;
+    private IMessenger _messenger;
 
 
     private string? userInput;
@@ -55,18 +57,14 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
                 if (user == null)
                     return;
-
-                Console.WriteLine(user);
-
-                var window = new MainWindow();
-                window.ShowDialog();
             },
             canExecute: () => true);
     #endregion
 
 
-    public AuthenticationChoiceViewModel(IUserRepository userRepository) {
+    public AuthenticationChoiceViewModel(IUserRepository userRepository, IMessenger messenger) {
         _userRepository = userRepository;
+        _messenger = messenger;
     }
 
     public void InputValidation()

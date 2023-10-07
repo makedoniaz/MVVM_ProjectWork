@@ -6,6 +6,9 @@ using FitnessApp.ViewModels.Pages;
 using FitnessApp.Views.Authentication;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Repositories;
+using FitnessApp.Mediator.Interfaces;
+using FitnessApp.Mediator;
+using FitnessApp.Messages;
 
 namespace FitnessApp;
 
@@ -14,30 +17,48 @@ namespace FitnessApp;
 /// </summary>
 public partial class App : Application
 {
+    private Messenger messenger = new Messenger();
+
     public static Container Container { get; set; } = new Container();
+
+    private Window mainWindow = new AuthenticationWindow();
 
     protected override void OnStartup(StartupEventArgs e)
     {
         this.RegisterContainer();
         this.Start<AuthenticationChoiceViewModel>();
 
+        this.messenger.Subscribe<ChangeToMainWindowMessage>((message) =>
+        {
+            if (message is ChangeToMainWindowMessage navigationMessage)
+            {
+                this.mainWindow.Close();
+                this.mainWindow = new MainWindow();
+
+                var mainViewModel = Container.GetInstance<MainViewModel>();
+                mainViewModel.ActiveViewModel = Container.GetInstance<HomeViewModel>();
+                this.mainWindow.DataContext = mainViewModel;
+
+                this.mainWindow.ShowDialog();
+            }
+        });
+
         base.OnStartup(e);
     }
 
     private void Start<T>() where T : ViewModelBase
     {
-        var mainView = new AuthenticationWindow();
         var mainViewModel = Container.GetInstance<AuthenticationViewModel>();
         mainViewModel.ActiveViewModel = Container.GetInstance<T>();
 
-        mainView.DataContext = mainViewModel;
-
-        mainView.ShowDialog();
+        this.mainWindow.DataContext = mainViewModel;
+        this.mainWindow.ShowDialog();
     }
 
     private void RegisterContainer()
     {
         Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
+        Container.RegisterSingleton<IMessenger, Messenger>();
 
         Container.RegisterSingleton<AuthenticationViewModel>();
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
