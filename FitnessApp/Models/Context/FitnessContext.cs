@@ -6,6 +6,10 @@ public class FitnessContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
 
+    public DbSet<User> Users { get; set; }
+
+    public DbSet<UserInfo> UsersInfo { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);

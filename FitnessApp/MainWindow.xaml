@@ -10,13 +10,19 @@
     <Grid>
         <DockPanel>
             <Border DockPanel.Dock="Top" BorderBrush="#2d5986">
+                <DockPanel Background="#538cc6" Height="50">
+                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                        <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
+                        <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6"/>
+                        <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6"/>
+                    </StackPanel>
 
-                <StackPanel Background="#538cc6" Height="50" Orientation="Horizontal">
-                    <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
-                    <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6"/>
-                    <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6"/>
-                    <Button Content="Info" Padding="12" Margin="566 0 0 0" BorderThickness="0" Foreground="White" Background="#538cc6" />
-                </StackPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                        <Button Content="Info" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
+                    </StackPanel>
+                    
+                    <Grid />
+                </DockPanel>
             </Border>
             
             <ContentControl Content="{Binding ActiveViewModel}" />
