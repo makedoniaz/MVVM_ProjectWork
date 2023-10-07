@@ -1,6 +1,6 @@
 ﻿using FitnessApp.ViewModels.Base;
 
-namespace FitnessApp.ViewModels;
+namespace FitnessApp.ViewModels.Pages;
 
 public class MainViewModel : ViewModelBase
 {

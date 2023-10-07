@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FitnessApp.Views
+namespace FitnessApp.Views.Authentication
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for AuthenticationChoiceView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class AuthenticationChoiceView : UserControl
     {
-        public HomeView()
+        public AuthenticationChoiceView()
         {
             InitializeComponent();
         }

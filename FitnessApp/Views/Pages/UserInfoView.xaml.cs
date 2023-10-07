@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FitnessApp.Views
+namespace FitnessApp.Views.Pages
 {
     /// <summary>
     /// Interaction logic for UserInfoView.xaml
