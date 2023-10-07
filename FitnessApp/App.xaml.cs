@@ -4,6 +4,8 @@ using FitnessApp.ViewModels.Base;
 using FitnessApp.ViewModels.Authentication;
 using FitnessApp.ViewModels.Pages;
 using FitnessApp.Views.Authentication;
+using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Repositories;
 
 namespace FitnessApp;
 
@@ -35,6 +37,8 @@ public partial class App : Application
 
     private void RegisterContainer()
     {
+        Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
+
         Container.RegisterSingleton<AuthenticationViewModel>();
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
 
