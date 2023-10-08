@@ -15,7 +15,7 @@ public interface IGoalRepository
 
     IQueryable<Goal> GetByUserId(int userId);
 
-    void Create(Goal product);
+    void Create(Goal goal);
 
     void DeleteById(int id);
 }

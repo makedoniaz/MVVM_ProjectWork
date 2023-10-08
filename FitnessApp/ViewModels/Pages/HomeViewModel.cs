@@ -43,8 +43,8 @@ public class HomeViewModel : ViewModelBase
     }
     #endregion
 
-    #region Constructor
 
+    #region Constructor
     public HomeViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository, IGoalRepository goalRepository)
     {
         _messenger = messenger;
@@ -56,20 +56,30 @@ public class HomeViewModel : ViewModelBase
             if (message is SetupHomeViewModelMessage navigationMessage)
             {
                 var userId = App.Container.GetInstance<User>().Id;
-
-                var userInfo = _userInfoRepository.GetByUserId(userId);
-                this.CaloriesToConsume = userInfo.CaloriesToConsume;
-
-                var goalsList = _goalRepository.GetByUserId(userId).ToList();
-
-                foreach (var goal in goalsList)
-                {
-                    Goals.Add(goal);
-                }
+                RefreshUserCalorieInfo(userId);
+                RefreshAllGoals(userId);
             }
         });
         _goalRepository = goalRepository;
     }
+    #endregion
 
+
+    #region Methods
+    public void RefreshAllGoals(int userId)
+    {
+        this.Goals.Clear();
+        var goalsList = _goalRepository.GetByUserId(userId).ToList();
+
+        foreach (var goal in goalsList)
+            Goals.Add(goal);
+    }
+
+    public void RefreshUserCalorieInfo(int userId)
+    {
+        var userInfo = _userInfoRepository.GetByUserId(userId);
+        this.CaloriesToConsume = userInfo.CaloriesToConsume;
+        this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;
+    }
     #endregion
 }

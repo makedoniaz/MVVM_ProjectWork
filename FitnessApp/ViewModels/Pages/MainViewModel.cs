@@ -17,7 +17,6 @@ public class MainViewModel : ViewModelBase
         set => base.PropertyChangeMethod(out activeViewModel, value);
     }
 
-
     private bool isAuthenticated;
     public bool IsAuthenticated
     {
@@ -79,6 +78,7 @@ public class MainViewModel : ViewModelBase
     public CommandBase GoalsCommand => this.goalsCommand ??= new CommandBase(
             execute: () => {
                 this.ActiveViewModel = App.Container.GetInstance<GoalsViewModel>();
+                _messenger.Send<SetupGoalsViewModelMessage>(new SetupGoalsViewModelMessage());
             },
             canExecute: () => true);
 
