@@ -9,4 +9,5 @@ namespace FitnessApp.ViewModels.Pages;
 
 public class CaloriesViewModel : ViewModelBase
 {
+
 }

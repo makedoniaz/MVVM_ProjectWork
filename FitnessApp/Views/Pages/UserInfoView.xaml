@@ -6,7 +6,35 @@
              xmlns:local="clr-namespace:FitnessApp.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="#F5F5F5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        
+        <Border  Grid.Column="1" CornerRadius="8" Background="White" Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color=" #f2f2f2"/>
+            </Border.Effect>
+
+            <DockPanel>
+                <Button DockPanel.Dock="Bottom" Content="Edit" Margin="10" Padding="0 8" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="14"/>
+
+                <StackPanel Margin="10">
+                    <Label Content="Username:" FontSize="15"/>
+                    <Label Content="123" FontSize="15"/>
+                    <Separator/>
+                    <Label Content="Current Weight:" FontSize="15"  />
+                    <Label Content="123" FontSize="15"/>
+                    <Separator/>
+                    <Label Content="Target Weight:" FontSize="15" />
+                    <Label Content="123" FontSize="15"/>
+                </StackPanel>
+
+            </DockPanel>
+
+        </Border>
     </Grid>
 </UserControl>

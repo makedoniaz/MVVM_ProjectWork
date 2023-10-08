@@ -6,7 +6,60 @@
              xmlns:local="clr-namespace:FitnessApp.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="red">
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" CornerRadius="8" Background="White" Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color=" #f2f2f2"/>
+            </Border.Effect>
+
+            <Grid DockPanel.Dock="Top" Height="130">
+                <DockPanel>
+                    <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" FontSize="18" Margin="10">Today's calories left</Label>
+                    <Grid Height="60">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" FontSize="18" Content="{Binding CaloriesToConsume}"></Label>
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="18">-</Label>
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="18" Content="{Binding CaloriesConsumed}" />
+                        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="18">=</Label>
+                        <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="18" Content="{Binding CaloriesResult}"></Label>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" FontSize="13" Foreground="Gray">Goal</Label>
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" FontSize="13" Foreground="Gray">Consumed</Label>
+                        <Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" FontSize="13" Foreground="Gray">Left</Label>
+
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" CornerRadius="8" Background="White" Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color=" #f2f2f2"/>
+            </Border.Effect>
             
+            <DockPanel>
+                <Label DockPanel.Dock="Top" Content="History" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
+            </DockPanel>
+        </Border>
+
     </Grid>
+    
 </UserControl>
