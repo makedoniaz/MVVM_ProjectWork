@@ -11,6 +11,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace FitnessApp.ViewModels.Authentication;
 
@@ -55,11 +57,40 @@ public class AuthenticationChoiceViewModel : ViewModelBase
     private CommandBase? loginCommand;
     public CommandBase LoginCommand => this.loginCommand ??= new CommandBase(
             execute: () => {
+                this.ErrorMessage = string.Empty;
+
+                if (!InputValidation())
+                {
+                    this.ErrorMessage += "Invalid credentials!";
+                    return;
+                }
+
                 var user = AuthenticateUser();
 
                 if (user == null)
+                {
+                    this.ErrorMessage = "Couldn't login in the system!";
                     return;
+                }
 
+                //App.Container.RegisterSingleton<User>();
+
+                App.Container.GetInstance<User>().Username = user.Username;
+                App.Container.GetInstance<User>().Password = user.Password;
+
+
+                Console.WriteLine(App.Container.GetInstance<User>());
+
+
+                // ?? 
+            },
+            canExecute: () => true);
+
+
+    private CommandBase? signUpCommand;
+    public CommandBase SignUpCommand => this.signUpCommand ??= new CommandBase(
+            execute: () => {
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<SignUpViewModel>()));
 
             },
             canExecute: () => true);
@@ -71,18 +102,12 @@ public class AuthenticationChoiceViewModel : ViewModelBase
         _messenger = messenger;
     }
 
-    public void InputValidation()
+    public bool InputValidation()
     {
-        bool isInvalidUserName;
-        bool isInvalidPassword;
+        bool isInvalidUserName = string.IsNullOrWhiteSpace(UsernameInput) || UsernameInput.Length > 100;
+        bool isInvalidPassword = string.IsNullOrWhiteSpace(PasswordInput) || PasswordInput.Length > 100;
 
-        if (isInvalidUserName = string.IsNullOrWhiteSpace(UsernameInput) || UsernameInput.Length > 100)
-            this.ErrorMessage += "Invalid username!\n";
-
-        if (isInvalidPassword = string.IsNullOrWhiteSpace(PasswordInput) || PasswordInput.Length > 100)
-            this.ErrorMessage += "Invalid password!\n";
-
-        IsInvalidInput = !(isInvalidUserName || isInvalidPassword);
+        return !(isInvalidUserName || isInvalidPassword);
     }
 
     public User? AuthenticateUser()

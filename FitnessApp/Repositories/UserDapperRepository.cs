@@ -13,7 +13,7 @@ public class UserDapperRepository : IUserRepository
 
     public UserDapperRepository()
     {
-        this._sqlConnection = new SqlConnection("Server=localhost;Database=FitnessDb; TrustServerCertificate=True; Trusted_Connection=True;");
+        this._sqlConnection = new SqlConnection("Server=localhost;Database=FitnessDb; TrustServerCertificate=True; User Id=admin;Password=admin");
         this._sqlConnection.Open();
     }
 

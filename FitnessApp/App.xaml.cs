@@ -25,15 +25,15 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         this.RegisterContainer();
-        this.Start<HomeViewModel>();
+        this.Start<AuthenticationChoiceViewModel>();
 
         base.OnStartup(e);
     }
 
     private void Start<T>() where T : ViewModelBase
     {
-        var mainView = new MainWindow();
-        var mainViewModel = Container.GetInstance<MainViewModel>();
+        var mainView = new AuthenticationWindow();
+        var mainViewModel = Container.GetInstance<AuthenticationViewModel>();
 
         mainViewModel.ActiveViewModel = Container.GetInstance<T>();
 
@@ -48,6 +48,9 @@ public partial class App : Application
 
         Container.RegisterSingleton<AuthenticationViewModel>();
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
+        Container.RegisterSingleton<SignUpViewModel>();
+
+        Container.RegisterSingleton<User>();
 
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<HomeViewModel>();
