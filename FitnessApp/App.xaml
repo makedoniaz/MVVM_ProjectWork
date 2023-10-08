@@ -27,6 +27,10 @@
             <v_page:MealsView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm_page:AddMealViewModel}">
+            <v_page:AddMealView/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type vm_page:GoalsViewModel}">
             <v_page:GoalsView/>
         </DataTemplate>

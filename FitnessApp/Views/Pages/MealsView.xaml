@@ -38,7 +38,7 @@
                 </DockPanel>
             </Border>
 
-            <Button Grid.Row="1" Content="Add Meal" Margin="10" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="20"/>
+            <Button Grid.Row="1" Content="Add Meal" Margin="10" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="20" Command="{Binding AddMealCommand}"/>
 
         </Grid>
     </Grid>

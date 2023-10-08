@@ -46,6 +46,7 @@ public partial class App : Application
         Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
         Container.RegisterSingleton<IUserInfoRepository, UserInfoDapperRepository>();
         Container.RegisterSingleton<IGoalRepository, GoalsEFCoreRepository>();
+        Container.RegisterSingleton<IMealRepository, MealEfCoreRepository>();
         Container.RegisterSingleton<IMessenger, Messenger>();
 
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
@@ -57,6 +58,7 @@ public partial class App : Application
         Container.RegisterSingleton<HomeViewModel>();
         Container.RegisterSingleton<CaloriesViewModel>();
         Container.RegisterSingleton<MealsViewModel>();
+        Container.RegisterSingleton<AddMealViewModel>();
         Container.RegisterSingleton<GoalsViewModel>();
         Container.RegisterSingleton<UserInfoViewModel>();
 

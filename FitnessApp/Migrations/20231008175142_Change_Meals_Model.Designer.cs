@@ -4,6 +4,7 @@ using FitnessApp.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Migrations
 {
     [DbContext(typeof(FitnessContext))]
-    partial class FitnessContextModelSnapshot : ModelSnapshot
+    [Migration("20231008175142_Change_Meals_Model")]
+    partial class Change_Meals_Model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,12 +67,7 @@ namespace FitnessApp.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Meals");
                 });
@@ -125,17 +123,6 @@ namespace FitnessApp.Migrations
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Goal", b =>
-                {
-                    b.HasOne("FitnessApp.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("FitnessApp.Models.Meal", b =>
                 {
                     b.HasOne("FitnessApp.Models.User", "User")
                         .WithMany()

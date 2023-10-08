@@ -62,8 +62,6 @@ public class GoalsViewModel : ViewModelBase
                 RefreshAllGoals();
             },
             canExecute: () => true);
-
-
     #endregion
 
     #region Methods
@@ -76,13 +74,6 @@ public class GoalsViewModel : ViewModelBase
 
         foreach (var goal in goalsList)
             Goals.Add(goal);
-    }
-
-
-    private string ConvertRichTextBoxContentsToString(RichTextBox richTextBox)
-    {
-        TextRange textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
-        return textRange.Text;
     }
     #endregion
 }

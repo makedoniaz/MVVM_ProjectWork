@@ -78,7 +78,7 @@ public class MainViewModel : ViewModelBase
     public CommandBase GoalsCommand => this.goalsCommand ??= new CommandBase(
             execute: () => {
                 this.ActiveViewModel = App.Container.GetInstance<GoalsViewModel>();
-                _messenger.Send<SetupGoalsViewModelMessage>(new SetupGoalsViewModelMessage());
+                _messenger.Send(new SetupGoalsViewModelMessage());
             },
             canExecute: () => true);
 

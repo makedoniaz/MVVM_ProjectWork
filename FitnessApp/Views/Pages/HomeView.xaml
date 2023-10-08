@@ -69,9 +69,10 @@
                 <DropShadowEffect Color=" #f2f2f2"/>
             </Border.Effect>
 
-            <Grid>
-                <Label HorizontalContentAlignment="Left" FontSize="18" Margin="10">Today's meals</Label>
-            </Grid>
+            <DockPanel>
+                <Label DockPanel.Dock="Top" HorizontalContentAlignment="Left" FontSize="18" Margin="10">Today's Meals</Label>
+                <ListView ItemsSource="{Binding Meals}" />
+            </DockPanel>
         </Border>
     </Grid>
 </UserControl>

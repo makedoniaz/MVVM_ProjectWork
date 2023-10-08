@@ -17,9 +17,11 @@ public class HomeViewModel : ViewModelBase
     #region Fields
     private readonly IMessenger _messenger;
     private readonly IUserInfoRepository _userInfoRepository;
+    private readonly IMealRepository _mealRepository;
     private readonly IGoalRepository _goalRepository;
 
     public ObservableCollection<Goal> Goals { get; set; } = new ObservableCollection<Goal>();
+    public ObservableCollection<Meal> Meals { get; set; } = new ObservableCollection<Meal>();
 
     private double caloriesToConsume;
     public double CaloriesToConsume
@@ -45,11 +47,12 @@ public class HomeViewModel : ViewModelBase
 
 
     #region Constructor
-    public HomeViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository, IGoalRepository goalRepository)
+    public HomeViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository, IGoalRepository goalRepository, IMealRepository mealRepository)
     {
         _messenger = messenger;
         _userInfoRepository = userInfoRepository;
         _goalRepository = goalRepository;
+        _mealRepository = mealRepository;
 
         _messenger.Subscribe<SetupHomeViewModelMessage>((message) =>
         {
@@ -80,6 +83,16 @@ public class HomeViewModel : ViewModelBase
         var userInfo = _userInfoRepository.GetByUserId(userId);
         this.CaloriesToConsume = userInfo.CaloriesToConsume;
         this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;
+    }
+
+    public void RefreshMeals(int userId)
+    {
+        this.Meals.Clear();
+
+        var mealsList = _goalRepository.GetByUserId(userId).ToList();
+
+        foreach (var meal in mealsList)
+            Goals.Add(meal);
     }
     #endregion
 }
