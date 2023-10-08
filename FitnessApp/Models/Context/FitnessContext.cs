@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FitnessApp.Utilities.DatabaseInfo;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessApp.Models.Context;
 
@@ -14,6 +15,6 @@ public class FitnessContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
 
-        optionsBuilder.UseSqlServer(connectionString: "Server=localhost;Database=FitnessDb; TrustServerCertificate=True; Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer(connectionString: DbOptions.ConnectionString);
     }
 }

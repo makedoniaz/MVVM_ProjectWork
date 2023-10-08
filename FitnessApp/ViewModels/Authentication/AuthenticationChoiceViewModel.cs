@@ -1,19 +1,13 @@
 ﻿using FitnessApp.Commands.Base;
-using FitnessApp.Mediator;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Authentication;
+using FitnessApp.Utilities.DatabaseInfo;
 using FitnessApp.ViewModels.Base;
 using FitnessApp.ViewModels.Pages;
-using FitnessApp.Views.Authentication;
-using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Channels;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace FitnessApp.ViewModels.Authentication;
 
@@ -38,14 +32,6 @@ public class AuthenticationChoiceViewModel : ViewModelBase
         set => base.PropertyChangeMethod(out passwordInput, value);
     }
 
-
-    private bool? isInvalidInput;
-    public bool? IsInvalidInput
-    {
-        get => isInvalidInput;
-        set => base.PropertyChangeMethod(out isInvalidInput, value);
-    }
-
     private string? errorMessage;
     public string? ErrorMessage
     {
@@ -54,15 +40,24 @@ public class AuthenticationChoiceViewModel : ViewModelBase
     }
     #endregion
 
+
+    #region Constructor
+    public AuthenticationChoiceViewModel(IUserRepository userRepository, IMessenger messenger) {
+        _userRepository = userRepository;
+        _messenger = messenger;
+    }
+    #endregion
+
+
     #region Commands
     private CommandBase? loginCommand;
     public CommandBase LoginCommand => this.loginCommand ??= new CommandBase(
             execute: () => {
                 this.ErrorMessage = string.Empty;
 
-                if (!InputValidation())
+                if (!ValidationCommand.Validate(UsernameInput, PasswordInput))
                 {
-                    this.ErrorMessage += "Invalid credentials!";
+                    this.ErrorMessage = "Invalid credentials!";
                     return;
                 }
 
@@ -87,27 +82,15 @@ public class AuthenticationChoiceViewModel : ViewModelBase
     public CommandBase SignUpCommand => this.signUpCommand ??= new CommandBase(
             execute: () => {
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<SignUpViewModel>()));
-
             },
             canExecute: () => true);
     #endregion
 
 
-    public AuthenticationChoiceViewModel(IUserRepository userRepository, IMessenger messenger) {
-        _userRepository = userRepository;
-        _messenger = messenger;
-    }
-
-    public bool InputValidation()
-    {
-        bool isInvalidUserName = string.IsNullOrWhiteSpace(UsernameInput) || UsernameInput.Length > 100;
-        bool isInvalidPassword = string.IsNullOrWhiteSpace(PasswordInput) || PasswordInput.Length > 100;
-
-        return !(isInvalidUserName || isInvalidPassword);
-    }
-
+    #region Methods
     public User? AuthenticateUser()
     {
         return _userRepository.GetAll().FirstOrDefault(u => u.Username == UsernameInput && u.Password == PasswordInput);
     }
+    #endregion
 }

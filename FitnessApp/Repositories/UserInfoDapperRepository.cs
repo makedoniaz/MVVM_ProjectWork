@@ -1,12 +1,8 @@
 ﻿using Dapper;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
+using FitnessApp.Utilities.DatabaseInfo;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessApp.Repositories;
 
@@ -17,7 +13,7 @@ public class UserInfoDapperRepository : IUserInfoRepository
 
     public UserInfoDapperRepository()
     {
-        this._sqlConnection = new SqlConnection("Server=localhost;Database=FitnessDb; TrustServerCertificate=True; Trusted_Connection=True;");
+        this._sqlConnection = new SqlConnection(DbOptions.ConnectionString);
         this._sqlConnection.Open();
     }
 

@@ -1,7 +1,6 @@
 ﻿using FitnessApp.Models;
 using FitnessApp.Models.Context;
 using FitnessApp.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,8 +14,6 @@ public class ProductEfCoreRepository : IProductRepository
 
     public ProductEfCoreRepository() => _context = new FitnessContext();
 
-    
-
     public void Update(int id, User user)
     {
         if (user.Id == default)
@@ -26,9 +23,9 @@ public class ProductEfCoreRepository : IProductRepository
         this._context.SaveChanges();
     }
 
-    public IEnumerable<Product> GetAll()
+    public IQueryable<Product> GetAll()
     {
-        return _context.Products.ToList();
+        return _context.Products;
     }
 
     public Product? GetById(int id)

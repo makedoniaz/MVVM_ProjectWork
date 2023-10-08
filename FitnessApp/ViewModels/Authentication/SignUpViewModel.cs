@@ -1,17 +1,14 @@
 ﻿using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Authentication;
 using FitnessApp.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessApp.ViewModels.Authentication;
 
 public class SignUpViewModel : ViewModelBase
 {
+    #region Fields
     private readonly IUserRepository _userRepository;
     private readonly IMessenger _messenger;
 
@@ -35,32 +32,30 @@ public class SignUpViewModel : ViewModelBase
         get => errorMessage;
         set => base.PropertyChangeMethod(out errorMessage, value);
     }
+    #endregion
 
 
+    #region Constructor
     public SignUpViewModel(IUserRepository userRepository, IMessenger messenger)
     {
         _userRepository = userRepository;
         _messenger = messenger;
     }
+    #endregion
 
+
+    #region Command
     private CommandBase? signUpCommand;
     public CommandBase SignUpCommand => this.signUpCommand ??= new CommandBase(
             execute: () => {
                 this.ErrorMessage = string.Empty;
 
-                if (!InputValidation())
+                if (!ValidationCommand.Validate(UsernameInput, PasswordInput))
                 {
                     this.ErrorMessage += "Invalid credentials!";
                     return;
                 }
             },
             canExecute: () => true);
-
-    public bool InputValidation()
-    {
-        bool isInvalidUserName = string.IsNullOrWhiteSpace(UsernameInput) || UsernameInput.Length > 100;
-        bool isInvalidPassword = string.IsNullOrWhiteSpace(PasswordInput) || PasswordInput.Length > 100;
-
-        return !(isInvalidUserName || isInvalidPassword);
-    }
+    #endregion
 }

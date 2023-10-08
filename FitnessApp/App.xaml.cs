@@ -46,7 +46,6 @@ public partial class App : Application
         Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
         Container.RegisterSingleton<IMessenger, Messenger>();
 
-        Container.RegisterSingleton<AuthenticationViewModel>();
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
         Container.RegisterSingleton<SignUpViewModel>();
 
@@ -58,7 +57,6 @@ public partial class App : Application
         Container.RegisterSingleton<MealsViewModel>();
         Container.RegisterSingleton<GoalsViewModel>();
         Container.RegisterSingleton<UserInfoViewModel>();
-
 
         Container.Verify();
     }
