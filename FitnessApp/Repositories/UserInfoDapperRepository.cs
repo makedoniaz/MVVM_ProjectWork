@@ -23,4 +23,12 @@ public class UserInfoDapperRepository : IUserInfoRepository
             sql: "select * from UsersInfo u where u.Id = @Id",
             param: new { Id = id });
     }
+
+    public UserInfo? GetByUserId(int userId)
+    {
+        return _sqlConnection.QueryFirst<UserInfo>(
+            sql: @"select * from UsersInfo ui
+                   where ui.UserId = @UserId",
+            param: new { UserId = userId });
+    }
 }

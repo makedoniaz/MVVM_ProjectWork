@@ -10,8 +10,6 @@ public class ProductEfCoreRepository : IProductRepository
 {
     private readonly FitnessContext _context;
 
-    public ProductEfCoreRepository(FitnessContext context) => _context = context;
-
     public ProductEfCoreRepository() => _context = new FitnessContext();
 
     public void Update(int id, User user)

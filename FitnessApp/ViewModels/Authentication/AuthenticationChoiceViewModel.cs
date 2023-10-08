@@ -42,6 +42,7 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
 
     #region Constructor
+
     public AuthenticationChoiceViewModel(IUserRepository userRepository, IMessenger messenger) {
         _userRepository = userRepository;
         _messenger = messenger;
@@ -69,10 +70,12 @@ public class AuthenticationChoiceViewModel : ViewModelBase
                     return;
                 }
 
+                App.Container.GetInstance<User>().Id = user.Id;
                 App.Container.GetInstance<User>().Username = user.Username;
                 App.Container.GetInstance<User>().Password = user.Password;
 
                 _messenger.Send(new AuthenticationMessage(true));
+                _messenger.Send(new SetupHomeViewModelMessage());
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<HomeViewModel>()));
             },
             canExecute: () => true);

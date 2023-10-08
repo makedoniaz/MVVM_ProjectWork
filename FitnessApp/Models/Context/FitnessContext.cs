@@ -11,6 +11,8 @@ public class FitnessContext : DbContext
 
     public DbSet<UserInfo> UsersInfo { get; set; }
 
+    public DbSet<Goal> Goals { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);

@@ -10,4 +10,6 @@ namespace FitnessApp.Repositories.Interfaces;
 public interface IUserInfoRepository
 {
     UserInfo? GetById(int id);
+
+    UserInfo? GetByUserId(int userId);
 }

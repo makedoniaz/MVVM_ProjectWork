@@ -57,9 +57,10 @@
                     <DropShadowEffect Color=" #f2f2f2"/>
                 </Border.Effect>
 
-                <Grid >
-                    <Label HorizontalContentAlignment="Left" FontSize="18" Margin="10">Goals</Label>
-                </Grid>
+                <DockPanel>
+                    <Label DockPanel.Dock="Top" HorizontalContentAlignment="Left" FontSize="18" Margin="10">Goals</Label>
+                    <ListView ItemsSource="{Binding Goals}" />
+                </DockPanel>
             </Border>
         </DockPanel>
 

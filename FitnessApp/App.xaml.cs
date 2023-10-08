@@ -44,6 +44,8 @@ public partial class App : Application
     private void RegisterContainer()
     {
         Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
+        Container.RegisterSingleton<IUserInfoRepository, UserInfoDapperRepository>();
+        Container.RegisterSingleton<IGoalRepository, GoalsEFCoreRepository>();
         Container.RegisterSingleton<IMessenger, Messenger>();
 
         Container.RegisterSingleton<AuthenticationChoiceViewModel>();
