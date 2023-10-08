@@ -12,13 +12,14 @@
             <Border DockPanel.Dock="Top" BorderBrush="#2d5986">
                 <DockPanel Background="#538cc6" Height="50">
                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                        <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
-                        <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6"/>
-                        <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6"/>
+                        <Button Content="Home" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" Command="{Binding HomeCommand}" />
+                        <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" Command="{Binding CaloriesCommand}" />
+                        <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6" Command="{Binding MealsCommand}"/>
+                        <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" Command="{Binding GoalsCommand}"/>
                     </StackPanel>
 
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                        <Button Content="Info" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" />
+                        <Button Content="Info" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" Command="{Binding UserInfoCommand}"/>
                     </StackPanel>
                     
                     <Grid />

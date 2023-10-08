@@ -1,4 +1,5 @@
-﻿using FitnessApp.Models;
+﻿using System;
+using FitnessApp.Models;
 using FitnessApp.ViewModels.Base;
 
 namespace FitnessApp.ViewModels.Pages;
@@ -6,7 +7,7 @@ namespace FitnessApp.ViewModels.Pages;
 public class HomeViewModel : ViewModelBase
 {
     #region Fields
-    UserInfo userInfo { get; set; }
+    public UserInfo UserInfo { get; set; }
 
     public double CaloriesToConsume { get; set; }
 
@@ -17,17 +18,6 @@ public class HomeViewModel : ViewModelBase
 
     public HomeViewModel() {
 
-        // TEST
-        userInfo = new UserInfo() { 
-            CaloriesToConsume = 3000, User = new User() { 
-                Username = "123",
-                Password = "123"
-            }
-        };
-        // TEST
-
-        CaloriesToConsume = userInfo.CaloriesToConsume;
-        CaloriesResult = CaloriesToConsume - CaloriesConsumed;
     }
 
 }

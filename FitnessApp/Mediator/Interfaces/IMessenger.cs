@@ -5,10 +5,7 @@ namespace FitnessApp.Mediator.Interfaces;
 
 public interface IMessenger
 {
-    public interface IMessenger
-    {
-        void Subscribe<T>(Action<IMessage> action) where T : IMessage;
+    void Subscribe<T>(Action<IMessage> action) where T : IMessage;
 
-        void Send<T>(T message) where T : IMessage;
-    }
+    void Send<T>(T message) where T : IMessage;
 }

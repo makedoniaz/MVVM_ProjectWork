@@ -1,5 +1,7 @@
 ﻿using FitnessApp.Commands.Base;
+using FitnessApp.Mediator;
 using FitnessApp.Mediator.Interfaces;
+using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.ViewModels.Base;
@@ -15,8 +17,8 @@ namespace FitnessApp.ViewModels.Authentication;
 public class AuthenticationChoiceViewModel : ViewModelBase
 {
     #region Fields
-    private IUserRepository _userRepository;
-    private IMessenger _messenger;
+    private readonly IUserRepository _userRepository;
+    private readonly IMessenger _messenger;
 
 
     private string? userInput;
@@ -57,6 +59,8 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
                 if (user == null)
                     return;
+
+
             },
             canExecute: () => true);
     #endregion

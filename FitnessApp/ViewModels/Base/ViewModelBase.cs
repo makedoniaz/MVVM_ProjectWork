@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FitnessApp.ViewModels.Base;
 
-public class ViewModelBase
+public class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
