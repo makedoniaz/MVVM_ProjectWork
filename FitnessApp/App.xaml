@@ -7,8 +7,6 @@
              xmlns:v_auth="clr-namespace:FitnessApp.Views.Authentication"
              xmlns:v_page="clr-namespace:FitnessApp.Views.Pages">
     <Application.Resources>
-
-
         <DataTemplate DataType="{x:Type vm_auth:AuthenticationChoiceViewModel}">
             <v_auth:AuthenticationChoiceView/>
         </DataTemplate>

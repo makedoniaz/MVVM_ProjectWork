@@ -32,8 +32,8 @@ public partial class App : Application
 
     private void Start<T>() where T : ViewModelBase
     {
-        var mainView = new AuthenticationWindow();
-        var mainViewModel = Container.GetInstance<AuthenticationViewModel>();
+        var mainView = new MainWindow();
+        var mainViewModel = Container.GetInstance<MainViewModel>();
 
         mainViewModel.ActiveViewModel = Container.GetInstance<T>();
 

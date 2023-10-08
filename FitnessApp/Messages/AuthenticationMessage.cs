@@ -5,11 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FitnessApp.Messages;
 
-public class ChangeToMainWindowMessage : IMessage
+public class AuthenticationMessage : IMessage
 {
-    
+    public readonly bool isAuthenticated;
+
+    public AuthenticationMessage(bool isAuthenticated)
+    {
+        this.isAuthenticated = isAuthenticated;
+    }
 }

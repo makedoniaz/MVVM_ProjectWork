@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         ResizeMode="NoResize">
-    <Grid>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+    
+    <Grid Background="#F5F5F5">
         <DockPanel>
-            <Border DockPanel.Dock="Top" BorderBrush="#2d5986">
+            <Border Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVis}}" DockPanel.Dock="Top" BorderBrush="#2d5986">
                 <DockPanel Background="#538cc6" Height="50">
                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                         <Button Content="Home" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding HomeCommand}" />

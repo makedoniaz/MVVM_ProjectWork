@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
@@ -13,11 +14,18 @@ public class MainViewModel : ViewModelBase
     private readonly IMessenger _messenger;
 
     private ViewModelBase activeViewModel;
-
     public ViewModelBase ActiveViewModel
     {
         get => activeViewModel;
         set => base.PropertyChangeMethod(out activeViewModel, value);
+    }
+
+
+    private bool isAuthenticated;
+    public bool IsAuthenticated
+    {
+        get => isAuthenticated;
+        set => base.PropertyChangeMethod(out isAuthenticated, value);
     }
     #endregion
 
@@ -63,4 +71,25 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 
+    public MainViewModel(IMessenger messenger)
+    {
+        _messenger = messenger;
+        this.isAuthenticated = false;
+
+        _messenger.Subscribe<NavigationMessage>((message) =>
+        {
+            if (message is NavigationMessage navigationMessage)
+            {
+                this.ActiveViewModel = navigationMessage.DestinationViewModel;
+            }
+        });
+
+        _messenger.Subscribe<AuthenticationMessage>((message) =>
+        {
+            if (message is AuthenticationMessage authenticationMessage)
+            {
+                this.IsAuthenticated = authenticationMessage.isAuthenticated;
+            }
+        });
+    }
 }

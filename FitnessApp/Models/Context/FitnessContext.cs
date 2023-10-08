@@ -14,6 +14,6 @@ public class FitnessContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
 
-        optionsBuilder.UseSqlServer(connectionString: "Server=localhost;Database=FitnessDb; TrustServerCertificate=True; User Id=admin;Password=admin");
+        optionsBuilder.UseSqlServer(connectionString: "Server=localhost;Database=FitnessDb; TrustServerCertificate=True; Trusted_Connection=True;");
     }
 }

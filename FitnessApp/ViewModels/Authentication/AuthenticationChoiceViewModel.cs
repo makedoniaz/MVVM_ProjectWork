@@ -5,6 +5,7 @@ using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.ViewModels.Base;
+using FitnessApp.ViewModels.Pages;
 using FitnessApp.Views.Authentication;
 using System;
 using System.Linq;
@@ -73,16 +74,11 @@ public class AuthenticationChoiceViewModel : ViewModelBase
                     return;
                 }
 
-                //App.Container.RegisterSingleton<User>();
-
                 App.Container.GetInstance<User>().Username = user.Username;
                 App.Container.GetInstance<User>().Password = user.Password;
 
-
-                Console.WriteLine(App.Container.GetInstance<User>());
-
-
-                // ?? 
+                _messenger.Send(new AuthenticationMessage(true));
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<HomeViewModel>()));
             },
             canExecute: () => true);
 
