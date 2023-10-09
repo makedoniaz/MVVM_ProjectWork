@@ -78,7 +78,6 @@ public class HomeViewModel : ViewModelBase
 
     public void RefreshUserCalorieInfo(int userId)
     {
-        Console.WriteLine(userId);
         var userInfo = _userInfoRepository.GetByUserId(userId);
         this.CaloriesToConsume = userInfo.CaloriesToConsume;
         this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;

@@ -56,7 +56,7 @@ public class AuthenticationChoiceViewModel : ViewModelBase
             execute: () => {
                 this.ErrorMessage = string.Empty;
 
-                if (!ValidationCommand.Validate(UsernameInput, PasswordInput))
+                if (!AuthenticationValidationCommand.ValidateCredentials(UsernameInput, PasswordInput))
                 {
                     this.ErrorMessage = "Invalid credentials!";
                     return;
@@ -90,9 +90,18 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
 
     #region Methods
+
+    public override void RefreshViewModel()
+    {
+        UsernameInput = string.Empty;
+        PasswordInput = string.Empty;
+        ErrorMessage = string.Empty;
+    }
+
     public User? AuthenticateUser()
     {
         return _userRepository.GetAll().FirstOrDefault(u => u.Username == UsernameInput && u.Password == PasswordInput);
     }
+
     #endregion
 }

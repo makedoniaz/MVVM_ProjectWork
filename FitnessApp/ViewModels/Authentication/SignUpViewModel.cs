@@ -63,15 +63,19 @@ public class SignUpViewModel : ViewModelBase
     #endregion
 
 
-    #region Command
+    #region Commands
     private CommandBase? signUpCommand;
     public CommandBase SignUpCommand => this.signUpCommand ??= new CommandBase(
-            execute: () => {
+            execute: () =>
+            {
                 this.ErrorMessage = string.Empty;
 
-                if (!ValidationCommand.Validate(UsernameInput, PasswordInput))
+                bool isInvalidInput = !AuthenticationValidationCommand.ValidateCredentials(UsernameInput, PasswordInput) ||
+                    !AuthenticationValidationCommand.ValidateUserInfo(CurrentWeightInput, TargetWeightInput);
+
+                if (isInvalidInput)
                 {
-                    this.ErrorMessage += "Invalid credentials!";
+                    this.ErrorMessage = "Invalid credentials!";
                     return;
                 }
 
@@ -92,5 +96,25 @@ public class SignUpViewModel : ViewModelBase
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<AuthenticationChoiceViewModel>()));
             },
             canExecute: () => true);
+
+
+    private CommandBase? goBackCommand;
+    public CommandBase GoBackCommand => this.goBackCommand ??= new CommandBase(
+        execute: () =>
+        {
+            _messenger.Send(new NavigationMessage(App.Container.GetInstance<AuthenticationChoiceViewModel>()));
+        },
+        canExecute: () => true);
+    #endregion
+
+    #region Methods
+    public override void RefreshViewModel()
+    {
+        UsernameInput = string.Empty;
+        PasswordInput = string.Empty;
+        CurrentWeightInput = 0;
+        TargetWeightInput = 0;
+        ErrorMessage = string.Empty;
+    }
     #endregion
 }
