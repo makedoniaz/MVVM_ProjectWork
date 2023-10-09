@@ -2,6 +2,7 @@
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
@@ -22,7 +23,7 @@ public class HomeViewModel : ViewModelBase
     private readonly IGoalRepository _goalRepository;
 
     public ObservableCollection<Goal> Goals { get; set; } = new ObservableCollection<Goal>();
-    public ObservableCollection<Meal> Meals { get; set; } = new ObservableCollection<Meal>();
+    public ObservableCollection<Meal> TodayMeals { get; set; } = new ObservableCollection<Meal>();
 
     private double caloriesToConsume;
     public double CaloriesToConsume
@@ -62,9 +63,9 @@ public class HomeViewModel : ViewModelBase
     public override void RefreshViewModel()
     {
         var userId = App.Container.GetInstance<User>().Id;
+        RefreshMeals(userId);
         RefreshUserCalorieInfo(userId);
         RefreshAllGoals(userId);
-        RefreshMeals(userId);
     }
 
     public void RefreshAllGoals(int userId)
@@ -80,17 +81,28 @@ public class HomeViewModel : ViewModelBase
     {
         var userInfo = _userInfoRepository.GetByUserId(userId);
         this.CaloriesToConsume = userInfo.CaloriesToConsume;
+
+        double caloriesSum = 0;
+
+        foreach (var meal in this.TodayMeals)
+            caloriesSum += meal.CaloriesAmount;
+
+        this.CaloriesConsumed = caloriesSum;
+
         this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;
     }
 
     public void RefreshMeals(int userId)
     {
-        this.Meals.Clear();
+        this.TodayMeals.Clear();
 
-        var mealsList = _mealRepository.GetByUserId(userId).ToList();
+        var from = DateTime.Today;
+        var to = DateTime.Today.AddDays(1);
+
+        var mealsList = FilterMealsByDateCommand.Filter(_mealRepository.GetByUserId(userId), from, to);
 
         foreach (var meal in mealsList)
-            Meals.Add(meal);
+            TodayMeals.Add(meal);
     }
     #endregion
 }

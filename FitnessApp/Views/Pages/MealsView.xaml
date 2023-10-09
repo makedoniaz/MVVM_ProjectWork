@@ -36,6 +36,7 @@
 
                 <DockPanel>
                     <Label DockPanel.Dock="Top" Content="Today" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
+                    <ListView ItemsSource="{Binding TodayMeals}"/>
                 </DockPanel>
             </Border>
 

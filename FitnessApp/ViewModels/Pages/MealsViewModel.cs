@@ -3,6 +3,7 @@ using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ public class MealsViewModel : ViewModelBase
 
     public ObservableCollection<Meal> Meals { get; set; } = new ObservableCollection<Meal>();
 
+    public ObservableCollection<Meal> TodayMeals { get; set; } = new ObservableCollection<Meal>();
+
     public MealsViewModel(IMessenger messenger, IMealRepository mealRepository)
     {
         _messenger = messenger;
@@ -36,11 +39,29 @@ public class MealsViewModel : ViewModelBase
     public override void RefreshViewModel()
     {
         var userId = App.Container.GetInstance<User>().Id;
+        RefreshMeals(userId);
+        RefreshTodaysMeals(userId);
+    }
 
+    public void RefreshMeals(int userId)
+    {
         this.Meals.Clear();
         var mealsList = _mealRepository.GetByUserId(userId).ToList();
 
         foreach (var meal in mealsList)
             Meals.Add(meal);
+    }
+
+    public void RefreshTodaysMeals(int userId)
+    {
+        this.TodayMeals.Clear();
+
+        var from = DateTime.Today;
+        var to = DateTime.Today.AddDays(1);
+
+        var mealsList = FilterMealsByDateCommand.Filter(_mealRepository.GetByUserId(userId), from, to);
+
+        foreach (var meal in mealsList)
+            TodayMeals.Add(meal);
     }
 }
