@@ -11,4 +11,9 @@ static class DbOptions
 
     public static double MinTargetWeight = 30;
     public static double MaxTargetWeight = 200;
+
+    public static int MaxMealNameInputLength = 500;
+    public static int MaxMealCaloriesAmount = 2000;
+
+    public static int MaxGoalInputLength = 500;
 }

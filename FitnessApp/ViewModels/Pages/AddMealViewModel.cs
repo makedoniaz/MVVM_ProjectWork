@@ -3,6 +3,7 @@ using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,14 @@ public class AddMealViewModel : ViewModelBase
         set => base.PropertyChangeMethod(out caloriesAmountInput, value);
     }
 
+    private string? errorMessage;
+    public string? ErrorMessage
+    {
+        get => errorMessage;
+        set => base.PropertyChangeMethod(out errorMessage, value);
+    }
+
+
     public AddMealViewModel(IMealRepository mealRepository, IMessenger messenger)
     {
         _mealRepository = mealRepository;
@@ -41,6 +50,13 @@ public class AddMealViewModel : ViewModelBase
     private CommandBase? addMealCommand;
     public CommandBase AddMealCommand => this.addMealCommand ??= new CommandBase(
             execute: () => {
+
+                if (!MealInputValidationCommand.ValidateMealInput(MealNameInput, CaloriesAmountInput))
+                {
+                    ErrorMessage = "Invalid meal info input!";
+                    return;
+                }
+
                 _mealRepository.Create(new Meal()
                 {
                     Name = MealNameInput,
