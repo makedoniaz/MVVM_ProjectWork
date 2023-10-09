@@ -2,7 +2,11 @@
 using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
+using FitnessApp.Models;
+using FitnessApp.Utilities.Authentication;
+using FitnessApp.ViewModels.Authentication;
 using FitnessApp.ViewModels.Base;
+using FitnessApp.Views.Authentication;
 
 namespace FitnessApp.ViewModels.Pages;
 
@@ -59,15 +63,6 @@ public class MainViewModel : ViewModelBase
             },
             canExecute: () => true);
 
-
-    private CommandBase? caloriesCommand;
-    public CommandBase CaloriesCommand => this.caloriesCommand ??= new CommandBase(
-            execute: () => {
-                _messenger.Send(new NavigationMessage(App.Container.GetInstance<CaloriesViewModel>()));
-            },
-            canExecute: () => true);
-
-
     private CommandBase? mealsCommand;
     public CommandBase MealsCommand => this.mealsCommand ??= new CommandBase(
             execute: () => {
@@ -88,6 +83,15 @@ public class MainViewModel : ViewModelBase
     public CommandBase UserInfoCommand => this.userInfoCommand ??= new CommandBase(
             execute: () => {
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<UserInfoViewModel>()));
+            },
+            canExecute: () => true);
+
+    private CommandBase? logoutCommand;
+    public CommandBase LogoutCommand => this.logoutCommand ??= new CommandBase(
+            execute: () => {
+                LogoutUserCommand.Logout();
+                _messenger.Send(new AuthenticationMessage(false));
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<AuthenticationChoiceViewModel>()));
             },
             canExecute: () => true);
     #endregion

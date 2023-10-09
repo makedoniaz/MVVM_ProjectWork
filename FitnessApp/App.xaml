@@ -18,10 +18,6 @@
         <DataTemplate DataType="{x:Type vm_page:HomeViewModel}">
             <v_page:HomeView/>
         </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type vm_page:CaloriesViewModel}">
-            <v_page:CaloriesView/>
-        </DataTemplate>
 
         <DataTemplate DataType="{x:Type vm_page:MealsViewModel}">
             <v_page:MealsView/>

@@ -18,13 +18,13 @@
                 <DockPanel Background="#538cc6" Height="50">
                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                         <Button Content="Home" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding HomeCommand}" />
-                        <Button Content="Calories" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding CaloriesCommand}" />
                         <Button Content="Meals" Padding="12"  BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding MealsCommand}"/>
                         <Button Content="Goals" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding GoalsCommand}"/>
                     </StackPanel>
 
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                         <Button Content="User Info" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding UserInfoCommand}"/>
+                        <Button Content="Log out" Padding="12" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding LogoutCommand}" />
                     </StackPanel>
                     
                     <Grid />

@@ -56,7 +56,6 @@ public partial class App : Application
 
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<HomeViewModel>();
-        Container.RegisterSingleton<CaloriesViewModel>();
         Container.RegisterSingleton<MealsViewModel>();
         Container.RegisterSingleton<AddMealViewModel>();
         Container.RegisterSingleton<GoalsViewModel>();
