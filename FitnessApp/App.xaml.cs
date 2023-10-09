@@ -43,7 +43,7 @@ public partial class App : Application
 
     private void RegisterContainer()
     {
-        Container.RegisterSingleton<IUserRepository, UserDapperRepository>();
+        Container.RegisterSingleton<IUserRepository, UserEFCoreRepository>();
         Container.RegisterSingleton<IUserInfoRepository, UserInfoDapperRepository>();
         Container.RegisterSingleton<IGoalRepository, GoalsEFCoreRepository>();
         Container.RegisterSingleton<IMealRepository, MealEfCoreRepository>();

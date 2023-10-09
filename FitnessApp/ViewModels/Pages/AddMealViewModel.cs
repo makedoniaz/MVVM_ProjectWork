@@ -1,4 +1,6 @@
 ﻿using FitnessApp.Commands.Base;
+using FitnessApp.Mediator.Interfaces;
+using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.ViewModels.Base;
@@ -13,6 +15,7 @@ namespace FitnessApp.ViewModels.Pages;
 public class AddMealViewModel : ViewModelBase
 {
     private readonly IMealRepository _mealRepository;
+    private readonly IMessenger _messenger;
 
     private string? mealNameInput;
     public string? MealNameInput
@@ -28,9 +31,10 @@ public class AddMealViewModel : ViewModelBase
         set => base.PropertyChangeMethod(out caloriesAmountInput, value);
     }
 
-    public AddMealViewModel(IMealRepository mealRepository)
+    public AddMealViewModel(IMealRepository mealRepository, IMessenger messenger)
     {
         _mealRepository = mealRepository;
+        _messenger = messenger;
     }
 
 
@@ -44,6 +48,8 @@ public class AddMealViewModel : ViewModelBase
                     UserId = App.Container.GetInstance<User>().Id,
                     CreationDate = DateTime.Now
                 });
+
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<MealsViewModel>()));
             },
             canExecute: () => true);
 

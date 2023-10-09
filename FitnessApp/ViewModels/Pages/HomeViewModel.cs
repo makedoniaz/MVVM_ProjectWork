@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace FitnessApp.ViewModels.Pages;
@@ -53,22 +54,19 @@ public class HomeViewModel : ViewModelBase
         _userInfoRepository = userInfoRepository;
         _goalRepository = goalRepository;
         _mealRepository = mealRepository;
-
-        _messenger.Subscribe<SetupHomeViewModelMessage>((message) =>
-        {
-            if (message is SetupHomeViewModelMessage navigationMessage)
-            {
-                var userId = App.Container.GetInstance<User>().Id;
-                RefreshUserCalorieInfo(userId);
-                RefreshAllGoals(userId);
-            }
-        });
-        _goalRepository = goalRepository;
     }
     #endregion
 
 
     #region Methods
+    public override void RefreshViewModel()
+    {
+        var userId = App.Container.GetInstance<User>().Id;
+        RefreshUserCalorieInfo(userId);
+        RefreshAllGoals(userId);
+        RefreshMeals(userId);
+    }
+
     public void RefreshAllGoals(int userId)
     {
         this.Goals.Clear();
@@ -80,6 +78,7 @@ public class HomeViewModel : ViewModelBase
 
     public void RefreshUserCalorieInfo(int userId)
     {
+        Console.WriteLine(userId);
         var userInfo = _userInfoRepository.GetByUserId(userId);
         this.CaloriesToConsume = userInfo.CaloriesToConsume;
         this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;
@@ -89,10 +88,10 @@ public class HomeViewModel : ViewModelBase
     {
         this.Meals.Clear();
 
-        var mealsList = _goalRepository.GetByUserId(userId).ToList();
+        var mealsList = _mealRepository.GetByUserId(userId).ToList();
 
         foreach (var meal in mealsList)
-            Goals.Add(meal);
+            Meals.Add(meal);
     }
     #endregion
 }

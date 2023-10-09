@@ -18,7 +18,8 @@
             </Border.Effect>
 
             <DockPanel>
-                <Label Content="History" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
+                <Label Content="History" DockPanel.Dock="Top" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
+                <ListView ItemsSource="{Binding Meals}"/>
             </DockPanel>
         </Border>
 

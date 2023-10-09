@@ -24,13 +24,13 @@
 
                 <StackPanel Margin="10">
                     <Label Content="Username:" FontSize="15"/>
-                    <Label Content="123" FontSize="15"/>
+                    <Label Content="{Binding Username}" FontSize="15"/>
                     <Separator/>
                     <Label Content="Current Weight:" FontSize="15"  />
-                    <Label Content="123" FontSize="15"/>
+                    <Label Content="{Binding CurrentWeight}" FontSize="15"/>
                     <Separator/>
                     <Label Content="Target Weight:" FontSize="15" />
-                    <Label Content="123" FontSize="15"/>
+                    <Label Content="{Binding TargetWeight}" FontSize="15"/>
                 </StackPanel>
 
             </DockPanel>

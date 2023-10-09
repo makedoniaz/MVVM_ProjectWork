@@ -1,5 +1,8 @@
-﻿using FitnessApp.Commands.Base;
+﻿using System;
+using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
+using FitnessApp.Messages;
+using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Authentication;
 using FitnessApp.ViewModels.Base;
@@ -10,6 +13,7 @@ public class SignUpViewModel : ViewModelBase
 {
     #region Fields
     private readonly IUserRepository _userRepository;
+    private readonly IUserInfoRepository _userInfoRepository;
     private readonly IMessenger _messenger;
 
     private string? userInput;
@@ -26,6 +30,20 @@ public class SignUpViewModel : ViewModelBase
         set => base.PropertyChangeMethod(out passwordInput, value);
     }
 
+    private double currentWeightInput;
+    public double CurrentWeightInput
+    {
+        get => currentWeightInput;
+        set => base.PropertyChangeMethod(out currentWeightInput, value);
+    }
+
+    private double targetWeightInput;
+    public double TargetWeightInput
+    {
+        get => targetWeightInput;
+        set => base.PropertyChangeMethod(out targetWeightInput, value);
+    }
+
     private string? errorMessage;
     public string? ErrorMessage
     {
@@ -36,10 +54,11 @@ public class SignUpViewModel : ViewModelBase
 
 
     #region Constructor
-    public SignUpViewModel(IUserRepository userRepository, IMessenger messenger)
+    public SignUpViewModel(IUserRepository userRepository, IMessenger messenger, IUserInfoRepository userInfoRepository)
     {
         _userRepository = userRepository;
         _messenger = messenger;
+        _userInfoRepository = userInfoRepository;
     }
     #endregion
 
@@ -55,6 +74,22 @@ public class SignUpViewModel : ViewModelBase
                     this.ErrorMessage += "Invalid credentials!";
                     return;
                 }
+
+                int userId = _userRepository.Create(new User()
+                {
+                    Username = UsernameInput,
+                    Password = PasswordInput
+                });
+
+                _userInfoRepository.Create(new UserInfo()
+                {
+                    CurrentWeight = this.CurrentWeightInput,
+                    TargetWeight = this.TargetWeightInput,
+                    CaloriesToConsume = 3000,
+                    UserId = userId
+                });
+
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<AuthenticationChoiceViewModel>()));
             },
             canExecute: () => true);
     #endregion

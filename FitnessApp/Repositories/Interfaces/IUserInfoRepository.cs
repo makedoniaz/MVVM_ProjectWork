@@ -12,4 +12,6 @@ public interface IUserInfoRepository
     UserInfo? GetById(int id);
 
     UserInfo? GetByUserId(int userId);
+
+    void Create(UserInfo userInfo);
 }

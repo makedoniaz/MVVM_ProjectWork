@@ -11,7 +11,7 @@ public interface IMealRepository
 
     Meal? GetById(int id);
 
-    public IQueryable GetByUserId(int userId);
+    public IQueryable<Meal> GetByUserId(int userId);
 
     void Create(Meal product);
 }

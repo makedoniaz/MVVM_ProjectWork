@@ -16,7 +16,7 @@ public class UserInfo
     [Range(0, 15000)]
     public double CaloriesToConsume { get; set; }
 
-    public required User User { get; set; }
+    public User? User { get; set; }
 
     public int UserId { get; set; }
 }

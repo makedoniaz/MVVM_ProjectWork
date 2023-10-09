@@ -1,4 +1,5 @@
-﻿using FitnessApp.Commands.Base;
+﻿using System;
+using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
 using FitnessApp.ViewModels.Base;
@@ -36,6 +37,7 @@ public class MainViewModel : ViewModelBase
             if (message is NavigationMessage navigationMessage)
             {
                 this.ActiveViewModel = navigationMessage.DestinationViewModel;
+                this.ActiveViewModel.RefreshViewModel();
             }
         });
 
@@ -53,7 +55,7 @@ public class MainViewModel : ViewModelBase
     private CommandBase? homeCommand;
     public CommandBase HomeCommand => this.homeCommand ??= new CommandBase(
             execute: () => {
-                this.ActiveViewModel = App.Container.GetInstance<HomeViewModel>();
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<HomeViewModel>()));
             },
             canExecute: () => true);
 
@@ -61,7 +63,7 @@ public class MainViewModel : ViewModelBase
     private CommandBase? caloriesCommand;
     public CommandBase CaloriesCommand => this.caloriesCommand ??= new CommandBase(
             execute: () => {
-                this.ActiveViewModel = App.Container.GetInstance<CaloriesViewModel>();
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<CaloriesViewModel>()));
             },
             canExecute: () => true);
 
@@ -69,7 +71,7 @@ public class MainViewModel : ViewModelBase
     private CommandBase? mealsCommand;
     public CommandBase MealsCommand => this.mealsCommand ??= new CommandBase(
             execute: () => {
-                this.ActiveViewModel = App.Container.GetInstance<MealsViewModel>();
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<MealsViewModel>()));
             },
             canExecute: () => true);
 
@@ -77,8 +79,7 @@ public class MainViewModel : ViewModelBase
     private CommandBase? goalsCommand;
     public CommandBase GoalsCommand => this.goalsCommand ??= new CommandBase(
             execute: () => {
-                this.ActiveViewModel = App.Container.GetInstance<GoalsViewModel>();
-                _messenger.Send(new SetupGoalsViewModelMessage());
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<GoalsViewModel>()));
             },
             canExecute: () => true);
 
@@ -86,7 +87,7 @@ public class MainViewModel : ViewModelBase
     private CommandBase? userInfoCommand;
     public CommandBase UserInfoCommand => this.userInfoCommand ??= new CommandBase(
             execute: () => {
-                this.ActiveViewModel = App.Container.GetInstance<UserInfoViewModel>();
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<UserInfoViewModel>()));
             },
             canExecute: () => true);
     #endregion

@@ -38,18 +38,17 @@ public class GoalsViewModel : ViewModelBase
         _messenger = messenger;
         _goalRepository = goalRepository;
 
-        _messenger.Subscribe<SetupGoalsViewModelMessage>((message) =>
-        {
-            if (message is SetupGoalsViewModelMessage navigationMessage)
-            {
-                RefreshAllGoals();
-            }
-        });
+        //_messenger.Subscribe<SetupGoalsViewModelMessage>((message) =>
+        //{
+        //    if (message is SetupGoalsViewModelMessage navigationMessage)
+        //    {
+        //        RefreshAllGoals();
+        //    }
+        //});
     }
     #endregion
 
     #region Commands
-
     private CommandBase? postGoalCommand;
     public CommandBase PostGoalCommand => this.postGoalCommand ??= new CommandBase(
             execute: () => {
@@ -59,13 +58,13 @@ public class GoalsViewModel : ViewModelBase
                     UserId = App.Container.GetInstance<User>().Id
                 });
 
-                RefreshAllGoals();
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<GoalsViewModel>()));
             },
             canExecute: () => true);
     #endregion
 
     #region Methods
-    public void RefreshAllGoals()
+    public override void RefreshViewModel()
     {
         this.Goals.Clear();
 

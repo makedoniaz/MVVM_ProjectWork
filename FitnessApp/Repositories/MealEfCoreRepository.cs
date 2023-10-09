@@ -22,7 +22,7 @@ public class MealEfCoreRepository : IMealRepository
         return _context.Meals.FirstOrDefault(m => m.Id == id);
     }
 
-    public IQueryable GetByUserId(int userId)
+    public IQueryable<Meal> GetByUserId(int userId)
     {
         return _context.Meals.Where(m => m.UserId == userId);
     }

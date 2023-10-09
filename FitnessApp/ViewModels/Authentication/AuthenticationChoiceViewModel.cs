@@ -75,7 +75,6 @@ public class AuthenticationChoiceViewModel : ViewModelBase
                 App.Container.GetInstance<User>().Password = user.Password;
 
                 _messenger.Send(new AuthenticationMessage(true));
-                _messenger.Send(new SetupHomeViewModelMessage());
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<HomeViewModel>()));
             },
             canExecute: () => true);
