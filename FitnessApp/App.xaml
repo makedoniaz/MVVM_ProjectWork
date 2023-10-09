@@ -35,5 +35,9 @@
             <v_page:UserInfoView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm_page:EditViewModel}">
+            <v_page:EditView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

@@ -69,4 +69,10 @@ public class AddMealViewModel : ViewModelBase
             },
             canExecute: () => true);
 
+    public override void RefreshViewModel()
+    {
+        MealNameInput = string.Empty;
+        CaloriesAmountInput = 0;
+        ErrorMessage = string.Empty;
+    }
 }

@@ -49,4 +49,23 @@ public class UserInfoDapperRepository : IUserInfoRepository
         if (affectedRowsCount <= 0)
             throw new Exception("Insert error!");
     }
+
+    public void Update(UserInfo userInfo, int userId)
+    {
+        var affectedRowsCount = _sqlConnection.Execute(
+           sql: $@"update UsersInfo set 
+                    CurrentWeight = @CurrentWeight, 
+                    TargetWeight = @TargetWeight,
+                    UserId = @UserId
+                    where UserId = @UserId",
+           param: new
+           {
+               CurrentWeight = userInfo.CurrentWeight,
+               TargetWeight = userInfo.TargetWeight,
+               UserId = userId,
+           });
+
+        if (affectedRowsCount <= 0)
+            throw new Exception("Insert error!");
+    }
 }

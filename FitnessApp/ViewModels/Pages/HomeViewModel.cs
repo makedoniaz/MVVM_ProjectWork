@@ -2,6 +2,7 @@
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Calories;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -80,7 +81,7 @@ public class HomeViewModel : ViewModelBase
     public void RefreshUserCalorieInfo(int userId)
     {
         var userInfo = _userInfoRepository.GetByUserId(userId);
-        this.CaloriesToConsume = userInfo.CaloriesToConsume;
+        this.CaloriesToConsume = CaloriesCalculator.CalculateCalories(userInfo.CurrentWeight, userInfo.TargetWeight);
 
         double caloriesSum = 0;
 

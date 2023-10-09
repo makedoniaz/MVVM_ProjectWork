@@ -1,4 +1,6 @@
-﻿using FitnessApp.Mediator.Interfaces;
+﻿using FitnessApp.Commands.Base;
+using FitnessApp.Mediator.Interfaces;
+using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.ViewModels.Base;
@@ -42,7 +44,18 @@ public class UserInfoViewModel : ViewModelBase
     }
     #endregion
 
+    #region Commands
+    private CommandBase? editCommand;
+    public CommandBase EditCommand => this.editCommand ??= new CommandBase(
+            execute: () => {
+                _messenger.Send(new NavigationMessage(App.Container.GetInstance<EditViewModel>()));
+            },
+            canExecute: () => true);
 
+    #endregion
+
+
+    #region Methods
     public override void RefreshViewModel()
     {
         var userId = App.Container.GetInstance<User>().Id;
@@ -52,4 +65,5 @@ public class UserInfoViewModel : ViewModelBase
         this.CurrentWeight = userInfo.CurrentWeight;
         this.TargetWeight = userInfo.TargetWeight;
     }
+    #endregion
 }

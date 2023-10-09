@@ -15,7 +15,7 @@
             <DockPanel Margin="10">
                 <Label DockPanel.Dock="Top" FontSize="17" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0 0 0 0" Content="Create your personal account" />
                 <StackPanel DockPanel.Dock="Bottom">
-                    <Button Content="Sign Up" FontSize="15" BorderThickness="0" Background="#1a1a1a" Foreground="White" Padding="10" Command="{Binding SignUpCommand}"/>
+                    <Button Content="Sign Up" FontSize="15" BorderThickness="0" Background="#538cc6" Foreground="White" Padding="10" Command="{Binding SignUpCommand}"/>
                     <Button Content="Go back" Margin="0 5 0 0" FontSize="14" BorderThickness="0" Background="White" Foreground="Black" Padding="4" Command="{Binding GoBackCommand}"/>
                 </StackPanel>
 

@@ -35,7 +35,15 @@
 
             <DockPanel Margin="15">
                 <Label DockPanel.Dock="Top" FontSize="18" Content="Your goals"/>
-                <ListView ItemsSource="{Binding Goals}"/>
+                <ListView ItemsSource="{Binding Goals}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel TextBlock.FontSize="13px" Margin="5px">
+                                <TextBlock Text="{Binding Text}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </DockPanel>
 
         </Border>

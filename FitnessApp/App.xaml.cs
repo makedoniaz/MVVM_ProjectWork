@@ -60,6 +60,7 @@ public partial class App : Application
         Container.RegisterSingleton<AddMealViewModel>();
         Container.RegisterSingleton<GoalsViewModel>();
         Container.RegisterSingleton<UserInfoViewModel>();
+        Container.RegisterSingleton<EditViewModel>();
 
         Container.Verify();
     }

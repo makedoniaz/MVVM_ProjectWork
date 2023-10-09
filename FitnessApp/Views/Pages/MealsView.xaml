@@ -19,7 +19,16 @@
 
             <DockPanel>
                 <Label Content="History" DockPanel.Dock="Top" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
-                <ListView ItemsSource="{Binding Meals}"/>
+                <ListView ItemsSource="{Binding Meals}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel TextBlock.FontSize="13px" Margin="5px">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding CaloriesAmount, StringFormat=Calories: {0}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </DockPanel>
         </Border>
 
@@ -36,7 +45,16 @@
 
                 <DockPanel>
                     <Label DockPanel.Dock="Top" Content="Today" HorizontalContentAlignment="Center" FontSize="18" Margin="10"/>
-                    <ListView ItemsSource="{Binding TodayMeals}"/>
+                    <ListView ItemsSource="{Binding TodayMeals}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel TextBlock.FontSize="13px" Margin="5px">
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding CaloriesAmount, StringFormat=Calories: {0}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </DockPanel>
             </Border>
 

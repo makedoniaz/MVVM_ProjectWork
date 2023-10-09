@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Utilities.Pages;
 
-public static class GoalInputValidation
+public static class GoalInputValidationCommand
 {
     public static bool ValidateGoalInput(string? goalInputText)
     {

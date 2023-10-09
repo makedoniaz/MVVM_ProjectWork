@@ -20,8 +20,8 @@
             <DockPanel Margin="20">
                 <Label DockPanel.Dock="Top" FontSize="17" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0 0 0 15" Content="Start your fitness journey now!" />
                 <StackPanel DockPanel.Dock="Bottom">
-                    <Button Margin="0 0 0 5" FontSize="15" Content="Login" BorderThickness="0" Background="#1a1a1a" Foreground="White" Padding="10" Command="{Binding LoginCommand}" />
-                    <Button Content="or Sign Up" FontSize="15" BorderThickness="0" Background="#1a1a1a" Foreground="White" Padding="10" Command="{Binding SignUpCommand}"/>
+                    <Button Margin="0 0 0 5" FontSize="15" Content="Login" BorderThickness="0" Background="#538cc6" Foreground="White" Padding="10" Command="{Binding LoginCommand}" />
+                    <Button Content="Sign Up" FontSize="14" BorderThickness="0" Background="White" Foreground="Black" Padding="10" Command="{Binding SignUpCommand}"/>
                 </StackPanel>
                 
                 <StackPanel>

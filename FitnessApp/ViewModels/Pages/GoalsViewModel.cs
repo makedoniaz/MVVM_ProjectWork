@@ -60,7 +60,7 @@ public class GoalsViewModel : ViewModelBase
     private CommandBase? postGoalCommand;
     public CommandBase PostGoalCommand => this.postGoalCommand ??= new CommandBase(
             execute: () => {
-                if (!GoalInputValidation.ValidateGoalInput(this.GoalInputText))
+                if (!GoalInputValidationCommand.ValidateGoalInput(this.GoalInputText))
                 {
                     this.ErrorMessage = "Invalid goal input!";
                     return;
@@ -80,6 +80,9 @@ public class GoalsViewModel : ViewModelBase
     #region Methods
     public override void RefreshViewModel()
     {
+        this.GoalInputText = string.Empty;
+        this.ErrorMessage = string.Empty;
+
         this.Goals.Clear();
 
         var userId = App.Container.GetInstance<User>().Id;

@@ -14,4 +14,6 @@ public interface IUserInfoRepository
     UserInfo? GetByUserId(int userId);
 
     void Create(UserInfo userInfo);
+
+    void Update(UserInfo userInfo, int id);
 }

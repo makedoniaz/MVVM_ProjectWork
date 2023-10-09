@@ -7,6 +7,7 @@ using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Authentication;
 using FitnessApp.Utilities.Calories;
+using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 
 namespace FitnessApp.ViewModels.Authentication;
@@ -73,7 +74,7 @@ public class SignUpViewModel : ViewModelBase
                 this.ErrorMessage = string.Empty;
 
                 bool isInvalidInput = !AuthenticationValidationCommand.ValidateCredentials(UsernameInput, PasswordInput) ||
-                    !AuthenticationValidationCommand.ValidateUserInfo(CurrentWeightInput, TargetWeightInput);
+                    !UserInfoValidationCommand.ValidateUserInfo(CurrentWeightInput, TargetWeightInput);
 
                 if (isInvalidInput)
                 {
