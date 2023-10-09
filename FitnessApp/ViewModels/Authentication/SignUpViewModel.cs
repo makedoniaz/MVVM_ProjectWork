@@ -5,6 +5,7 @@ using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Authentication;
+using FitnessApp.Utilities.Calories;
 using FitnessApp.ViewModels.Base;
 
 namespace FitnessApp.ViewModels.Authentication;
@@ -89,7 +90,7 @@ public class SignUpViewModel : ViewModelBase
                 {
                     CurrentWeight = this.CurrentWeightInput,
                     TargetWeight = this.TargetWeightInput,
-                    CaloriesToConsume = 3000,
+                    CaloriesToConsume = CaloriesCalculator.CalculateCalories(this.CurrentWeightInput, this.TargetWeightInput),
                     UserId = userId
                 });
 

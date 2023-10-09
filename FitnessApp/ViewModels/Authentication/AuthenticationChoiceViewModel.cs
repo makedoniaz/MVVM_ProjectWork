@@ -4,7 +4,6 @@ using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Authentication;
-using FitnessApp.Utilities.DatabaseInfo;
 using FitnessApp.ViewModels.Base;
 using FitnessApp.ViewModels.Pages;
 using System.Linq;
