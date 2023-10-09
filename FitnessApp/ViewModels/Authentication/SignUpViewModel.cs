@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
@@ -80,6 +81,12 @@ public class SignUpViewModel : ViewModelBase
                     return;
                 }
 
+                if (CheckUsernameExistence(this.UsernameInput))
+                {
+                    this.ErrorMessage = "User with such username already exists!\nChoose other username!";
+                    return;
+                }
+
                 int userId = _userRepository.Create(new User()
                 {
                     Username = UsernameInput,
@@ -116,6 +123,11 @@ public class SignUpViewModel : ViewModelBase
         CurrentWeightInput = 0;
         TargetWeightInput = 0;
         ErrorMessage = string.Empty;
+    }
+
+    public bool CheckUsernameExistence(string username)
+    {
+        return _userRepository.GetAll().Where(u => u.Username == username).Any();
     }
     #endregion
 }
