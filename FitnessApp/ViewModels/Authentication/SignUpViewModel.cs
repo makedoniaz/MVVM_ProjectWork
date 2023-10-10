@@ -83,7 +83,7 @@ public class SignUpViewModel : ViewModelBase
 
                 if (CheckUsernameExistence(this.UsernameInput))
                 {
-                    this.ErrorMessage = "User with such username already exists!\nChoose other username!";
+                    this.ErrorMessage = "User with such username already exists!";
                     return;
                 }
 
