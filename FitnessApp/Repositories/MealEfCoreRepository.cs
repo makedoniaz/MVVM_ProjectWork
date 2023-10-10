@@ -1,8 +1,6 @@
 ﻿using FitnessApp.Models;
 using FitnessApp.Models.Context;
 using FitnessApp.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace FitnessApp.Repositories;

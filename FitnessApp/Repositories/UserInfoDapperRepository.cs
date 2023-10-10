@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
+using FitnessApp.Utilities.Calories;
 using FitnessApp.Utilities.DatabaseInfo;
 using System;
 using System.Data.SqlClient;
@@ -21,7 +22,8 @@ public class UserInfoDapperRepository : IUserInfoRepository
     public UserInfo? GetById(int id)
     {
         return _sqlConnection.QueryFirst<UserInfo>(
-            sql: "select * from UsersInfo u where u.Id = @Id",
+            sql: @"select * from UsersInfo u 
+                    where u.Id = @Id",
             param: new { Id = id });
     }
 
@@ -40,10 +42,10 @@ public class UserInfoDapperRepository : IUserInfoRepository
                     values(@CurrentWeight, @TargetWeight, @CaloriesToConsume, @UserId)",
            param: new
            {
-               CurrentWeight = userInfo.CurrentWeight,
-               TargetWeight = userInfo.TargetWeight,
-               CaloriesToConsume = userInfo.CaloriesToConsume,
-               UserId = userInfo.UserId,
+               userInfo.CurrentWeight,
+               userInfo.TargetWeight,
+               userInfo.CaloriesToConsume,
+               userInfo.UserId,
            });
 
         if (affectedRowsCount <= 0)
@@ -52,20 +54,24 @@ public class UserInfoDapperRepository : IUserInfoRepository
 
     public void Update(UserInfo userInfo, int userId)
     {
+        var newCaloriesToConsume = CaloriesCalculator.CalculateCalories(userInfo.CurrentWeight, userInfo.TargetWeight);
+
         var affectedRowsCount = _sqlConnection.Execute(
            sql: $@"update UsersInfo set 
                     CurrentWeight = @CurrentWeight, 
                     TargetWeight = @TargetWeight,
+                    CaloriesToConsume = @CaloriesToConsume,
                     UserId = @UserId
                     where UserId = @UserId",
            param: new
            {
-               CurrentWeight = userInfo.CurrentWeight,
-               TargetWeight = userInfo.TargetWeight,
+               userInfo.CurrentWeight,
+               userInfo.TargetWeight,
+               CaloriesToConsume = newCaloriesToConsume,
                UserId = userId,
            });
 
         if (affectedRowsCount <= 0)
-            throw new Exception("Insert error!");
+            throw new Exception("Update error!");
     }
 }

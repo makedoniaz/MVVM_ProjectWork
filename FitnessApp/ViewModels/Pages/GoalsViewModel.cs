@@ -5,14 +5,8 @@ using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace FitnessApp.ViewModels.Pages;
 
@@ -45,16 +39,9 @@ public class GoalsViewModel : ViewModelBase
     {
         _messenger = messenger;
         _goalRepository = goalRepository;
-
-        //_messenger.Subscribe<SetupGoalsViewModelMessage>((message) =>
-        //{
-        //    if (message is SetupGoalsViewModelMessage navigationMessage)
-        //    {
-        //        RefreshAllGoals();
-        //    }
-        //});
     }
     #endregion
+
 
     #region Commands
     private CommandBase? postGoalCommand;
@@ -77,12 +64,12 @@ public class GoalsViewModel : ViewModelBase
             canExecute: () => true);
     #endregion
 
+
     #region Methods
     public override void RefreshViewModel()
     {
         this.GoalInputText = string.Empty;
         this.ErrorMessage = string.Empty;
-
         this.Goals.Clear();
 
         var userId = App.Container.GetInstance<User>().Id;

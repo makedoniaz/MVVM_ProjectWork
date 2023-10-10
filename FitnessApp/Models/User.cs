@@ -12,10 +12,4 @@ public class User
 
     [MaxLength(100)]
     public required string Password { get; set; }
-
-
-    public override string ToString()
-    {
-        return $"{Username} {Password}";
-    }
 }

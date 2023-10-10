@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
@@ -90,8 +89,8 @@ public class SignUpViewModel : ViewModelBase
 
                 int userId = _userRepository.Create(new User()
                 {
-                    Username = UsernameInput,
-                    Password = PasswordInput
+                    Username = this.UsernameInput,
+                    Password = this.PasswordInput
                 });
 
                 _userInfoRepository.Create(new UserInfo()
@@ -106,7 +105,6 @@ public class SignUpViewModel : ViewModelBase
             },
             canExecute: () => true);
 
-
     private CommandBase? goBackCommand;
     public CommandBase GoBackCommand => this.goBackCommand ??= new CommandBase(
         execute: () =>
@@ -116,14 +114,15 @@ public class SignUpViewModel : ViewModelBase
         canExecute: () => true);
     #endregion
 
+
     #region Methods
     public override void RefreshViewModel()
     {
-        UsernameInput = string.Empty;
-        PasswordInput = string.Empty;
-        CurrentWeightInput = 0;
-        TargetWeightInput = 0;
-        ErrorMessage = string.Empty;
+        this.UsernameInput = string.Empty;
+        this.PasswordInput = string.Empty;
+        this.CurrentWeightInput = 0;
+        this.TargetWeightInput = 0;
+        this.ErrorMessage = string.Empty;
     }
 
     public bool CheckUsernameExistence(string username)

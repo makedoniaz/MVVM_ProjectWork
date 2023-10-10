@@ -3,16 +3,8 @@ using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
-using FitnessApp.Utilities.Authentication;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace FitnessApp.ViewModels.Pages;
 
 public class EditViewModel : ViewModelBase
@@ -43,6 +35,7 @@ public class EditViewModel : ViewModelBase
     }
     #endregion
 
+
     #region Constructor
     public EditViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository)
     {
@@ -50,6 +43,7 @@ public class EditViewModel : ViewModelBase
         _userInfoRepository = userInfoRepository;
     }
     #endregion
+
 
     #region Commands
     private CommandBase? goBackCommand;

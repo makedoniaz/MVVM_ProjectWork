@@ -17,13 +17,13 @@
             <Border.Effect>
                 <DropShadowEffect Color=" #f2f2f2"/>
             </Border.Effect>
-            <DockPanel Margin="10">
-                <Button DockPanel.Dock="Bottom" Content="Add meal" Padding="15 8" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="12" Command="{Binding AddMealCommand}"/>
+            <DockPanel Margin="20">
+                <Button DockPanel.Dock="Bottom" Content="Add meal" Padding="15 8" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding AddMealCommand}"/>
                 <StackPanel>
-                    <Label Content="Name" />
-                    <TextBox Text="{Binding MealNameInput}" Margin="0 0 0 10" />
-                    <Label Content="Calories Amount" />
-                    <TextBox Text="{Binding CaloriesAmountInput}" />
+                    <Label Content="Name" FontSize="14" />
+                    <TextBox Padding="5" Text="{Binding MealNameInput}" Margin="0 0 0 10" />
+                    <Label Content="Calories Amount" FontSize="14" />
+                    <TextBox Padding="5" Text="{Binding CaloriesAmountInput}" />
                     <Label Content="{Binding ErrorMessage}" Foreground="Red" Margin="0 10 0 0"/>
                 </StackPanel>
             </DockPanel>

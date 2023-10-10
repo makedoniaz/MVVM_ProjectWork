@@ -27,10 +27,10 @@
                     <Label Content="{Binding Username}" FontSize="15"/>
                     <Separator/>
                     <Label Content="Current Weight:" FontSize="15"  />
-                    <Label Content="{Binding CurrentWeight}" FontSize="15"/>
+                    <TextBlock Margin="5" Text="{Binding CurrentWeight, StringFormat={}{0} kg}" FontSize="15"/>
                     <Separator/>
                     <Label Content="Target Weight:" FontSize="15" />
-                    <Label Content="{Binding TargetWeight}" FontSize="15"/>
+                    <TextBlock Margin="5" Text="{Binding TargetWeight, StringFormat={}{0} kg}" FontSize="15"/>
                 </StackPanel>
 
             </DockPanel>

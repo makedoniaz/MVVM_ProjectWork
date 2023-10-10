@@ -16,7 +16,6 @@ public class AuthenticationChoiceViewModel : ViewModelBase
     private readonly IUserRepository _userRepository;
     private readonly IMessenger _messenger;
 
-
     private string? userInput;
     public string? UsernameInput
     {
@@ -41,7 +40,6 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
 
     #region Constructor
-
     public AuthenticationChoiceViewModel(IUserRepository userRepository, IMessenger messenger) {
         _userRepository = userRepository;
         _messenger = messenger;
@@ -89,18 +87,16 @@ public class AuthenticationChoiceViewModel : ViewModelBase
 
 
     #region Methods
-
     public override void RefreshViewModel()
     {
-        UsernameInput = string.Empty;
-        PasswordInput = string.Empty;
-        ErrorMessage = string.Empty;
+        this.UsernameInput = string.Empty;
+        this.PasswordInput = string.Empty;
+        this.ErrorMessage = string.Empty;
     }
 
     public User? AuthenticateUser()
     {
         return _userRepository.GetAll().FirstOrDefault(u => u.Username == UsernameInput && u.Password == PasswordInput);
     }
-
     #endregion
 }

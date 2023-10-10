@@ -24,7 +24,7 @@
                         <DataTemplate>
                             <StackPanel TextBlock.FontSize="13px" Margin="5px">
                                 <TextBlock Text="{Binding Name}"/>
-                                <TextBlock Text="{Binding CaloriesAmount, StringFormat=Calories: {0}}"/>
+                                <TextBlock Text="{Binding CaloriesAmount, StringFormat={}{0} kcal}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -50,7 +50,7 @@
                             <DataTemplate>
                                 <StackPanel TextBlock.FontSize="13px" Margin="5px">
                                     <TextBlock Text="{Binding Name}"/>
-                                    <TextBlock Text="{Binding CaloriesAmount, StringFormat=Calories: {0}}"/>
+                                    <TextBlock Text="{Binding CaloriesAmount, StringFormat={}{0} kcal}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

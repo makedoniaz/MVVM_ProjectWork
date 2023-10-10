@@ -1,16 +1,10 @@
 ﻿using FitnessApp.Mediator.Interfaces;
-using FitnessApp.Messages;
 using FitnessApp.Models;
 using FitnessApp.Repositories.Interfaces;
-using FitnessApp.Utilities.Calories;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
-using Microsoft.EntityFrameworkCore.Metadata;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 
 namespace FitnessApp.ViewModels.Pages;
@@ -18,12 +12,12 @@ namespace FitnessApp.ViewModels.Pages;
 public class HomeViewModel : ViewModelBase
 {
     #region Fields
-    private readonly IMessenger _messenger;
     private readonly IUserInfoRepository _userInfoRepository;
     private readonly IMealRepository _mealRepository;
     private readonly IGoalRepository _goalRepository;
 
     public ObservableCollection<Goal> Goals { get; set; } = new ObservableCollection<Goal>();
+
     public ObservableCollection<Meal> TodayMeals { get; set; } = new ObservableCollection<Meal>();
 
     private double caloriesToConsume;
@@ -50,9 +44,8 @@ public class HomeViewModel : ViewModelBase
 
 
     #region Constructor
-    public HomeViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository, IGoalRepository goalRepository, IMealRepository mealRepository)
+    public HomeViewModel(IUserInfoRepository userInfoRepository, IGoalRepository goalRepository, IMealRepository mealRepository)
     {
-        _messenger = messenger;
         _userInfoRepository = userInfoRepository;
         _goalRepository = goalRepository;
         _mealRepository = mealRepository;
@@ -81,7 +74,7 @@ public class HomeViewModel : ViewModelBase
     public void RefreshUserCalorieInfo(int userId)
     {
         var userInfo = _userInfoRepository.GetByUserId(userId);
-        this.CaloriesToConsume = CaloriesCalculator.CalculateCalories(userInfo.CurrentWeight, userInfo.TargetWeight);
+        this.CaloriesToConsume = userInfo.CaloriesToConsume;
 
         double caloriesSum = 0;
 
@@ -89,7 +82,6 @@ public class HomeViewModel : ViewModelBase
             caloriesSum += meal.CaloriesAmount;
 
         this.CaloriesConsumed = caloriesSum;
-
         this.CaloriesResult = this.CaloriesToConsume - this.CaloriesConsumed;
     }
 

@@ -1,12 +1,9 @@
-﻿using System;
-using FitnessApp.Commands.Base;
+﻿using FitnessApp.Commands.Base;
 using FitnessApp.Mediator.Interfaces;
 using FitnessApp.Messages;
-using FitnessApp.Models;
 using FitnessApp.Utilities.Authentication;
 using FitnessApp.ViewModels.Authentication;
 using FitnessApp.ViewModels.Base;
-using FitnessApp.Views.Authentication;
 
 namespace FitnessApp.ViewModels.Pages;
 

@@ -6,36 +6,43 @@ using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessApp.ViewModels.Pages;
 
 public class MealsViewModel : ViewModelBase
 {
+    #region Fields
     private readonly IMessenger _messenger;
     private readonly IMealRepository _mealRepository;
 
     public ObservableCollection<Meal> Meals { get; set; } = new ObservableCollection<Meal>();
 
     public ObservableCollection<Meal> TodayMeals { get; set; } = new ObservableCollection<Meal>();
+    #endregion
 
+
+    #region Constructor
     public MealsViewModel(IMessenger messenger, IMealRepository mealRepository)
     {
         _messenger = messenger;
         _mealRepository = mealRepository;
     }
+    #endregion
 
+
+    #region Commands
     private CommandBase? addMealCommand;
     public CommandBase AddMealCommand => this.addMealCommand ??= new CommandBase(
             execute: () => {
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<AddMealViewModel>()));
             },
             canExecute: () => true);
+    #endregion
 
+
+    #region Methods
     public override void RefreshViewModel()
     {
         var userId = App.Container.GetInstance<User>().Id;
@@ -64,4 +71,5 @@ public class MealsViewModel : ViewModelBase
         foreach (var meal in mealsList)
             TodayMeals.Add(meal);
     }
+    #endregion
 }

@@ -13,7 +13,6 @@ public class UserInfoViewModel : ViewModelBase
     private readonly IMessenger _messenger;
     private readonly IUserInfoRepository _userInfoRepository;
 
-
     public string? username;
     public string? Username
     {
@@ -36,6 +35,7 @@ public class UserInfoViewModel : ViewModelBase
     }
     #endregion
 
+
     #region Constructor
     public UserInfoViewModel(IMessenger messenger, IUserInfoRepository userInfoRepository)
     {
@@ -43,6 +43,7 @@ public class UserInfoViewModel : ViewModelBase
         _userInfoRepository = userInfoRepository;
     }
     #endregion
+
 
     #region Commands
     private CommandBase? editCommand;

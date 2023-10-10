@@ -13,19 +13,19 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         
-        <Border  Grid.Column="1" CornerRadius="8" Background="White" Margin="10">
+        <Border  Grid.Column="1" CornerRadius="8" Background="White" Margin="20">
             <Border.Effect>
                 <DropShadowEffect Color=" #f2f2f2"/>
             </Border.Effect>
 
             <DockPanel>
-                <Button DockPanel.Dock="Bottom" Content="Go back" Margin="10" Padding="0 8" BorderThickness="0" Foreground="Black" Background="White" FontSize="13" Command="{Binding GoBackCommand}"/>
-                <Button DockPanel.Dock="Bottom" Content="Save Changes" Margin="10 10 10 0" Padding="0 8" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="14" Command="{Binding SaveChangesCommand}"/>
+                <Button DockPanel.Dock="Bottom" Content="Go back" Margin="10" Padding="0 8" BorderThickness="0" Foreground="Black" Background="White" FontSize="14" Command="{Binding GoBackCommand}"/>
+                <Button DockPanel.Dock="Bottom" Content="Save Changes" Margin="10 10 10 0" Padding="0 8" BorderThickness="0" Foreground="White" Background="#538cc6" FontSize="15" Command="{Binding SaveChangesCommand}"/>
                 <StackPanel Margin="10">
                     <Label Content="Current Weight:" FontSize="15"  />
-                    <TextBox Margin="0 0 0 10" Text="{Binding CurrentWeightInput}" FontSize="15"/>
+                    <TextBox Padding="5" Margin="0 0 0 10" Text="{Binding CurrentWeightInput}" FontSize="15"/>
                     <Label Content="Target Weight:" FontSize="15" />
-                    <TextBox Text="{Binding TargetWeightInput}" FontSize="15"/>
+                    <TextBox  Padding="5" Text="{Binding TargetWeightInput}" FontSize="15"/>
                     <Label Foreground="Red" Content="{Binding ErrorMessage}"/>
                 </StackPanel>
 

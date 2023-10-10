@@ -1,5 +1,4 @@
 ﻿using FitnessApp.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace FitnessApp.Repositories.Interfaces;

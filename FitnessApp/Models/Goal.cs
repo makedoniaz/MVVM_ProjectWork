@@ -14,9 +14,4 @@ public class Goal
     public User User { get; set; }
 
     public int UserId { get; set; }
-
-    public override string ToString()
-    {
-        return $"{Text}";
-    }
 }

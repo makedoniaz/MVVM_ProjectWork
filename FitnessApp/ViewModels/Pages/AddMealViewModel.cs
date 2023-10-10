@@ -6,15 +6,12 @@ using FitnessApp.Repositories.Interfaces;
 using FitnessApp.Utilities.Pages;
 using FitnessApp.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessApp.ViewModels.Pages;
 
 public class AddMealViewModel : ViewModelBase
 {
+    #region Fields
     private readonly IMealRepository _mealRepository;
     private readonly IMessenger _messenger;
 
@@ -38,15 +35,19 @@ public class AddMealViewModel : ViewModelBase
         get => errorMessage;
         set => base.PropertyChangeMethod(out errorMessage, value);
     }
+    #endregion
 
 
+    #region Constructor
     public AddMealViewModel(IMealRepository mealRepository, IMessenger messenger)
     {
         _mealRepository = mealRepository;
         _messenger = messenger;
     }
+    #endregion
 
 
+    #region Commands
     private CommandBase? addMealCommand;
     public CommandBase AddMealCommand => this.addMealCommand ??= new CommandBase(
             execute: () => {
@@ -68,11 +69,15 @@ public class AddMealViewModel : ViewModelBase
                 _messenger.Send(new NavigationMessage(App.Container.GetInstance<MealsViewModel>()));
             },
             canExecute: () => true);
+    #endregion
 
+
+    #region Methods
     public override void RefreshViewModel()
     {
-        MealNameInput = string.Empty;
-        CaloriesAmountInput = 0;
-        ErrorMessage = string.Empty;
+        this.MealNameInput = string.Empty;
+        this.CaloriesAmountInput = 0;
+        this.ErrorMessage = string.Empty;
     }
+    #endregion
 }
